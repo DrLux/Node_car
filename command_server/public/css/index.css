@@ -1,0 +1,15 @@
+ 	html,body{
+		touch-action: none;
+		height:100%;
+		overflow: hidden;
+		background-color: DarkGray;
+	  position: relative;
+	}
+
+	img{
+      position: relative;
+  		border: 5px solid black;
+  		margin: auto;
+  		display:block;
+  		object-fit: cover;
+	}

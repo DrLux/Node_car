@@ -1,0 +1,26 @@
+{
+  "name": "calibrator",
+  "version": "1.0.0",
+  "description": "Allow you to calibrate the servos",
+  "main": "calibrator.js",
+  "scripts": {
+    "test": "calibrator.js"
+  },
+  "author": "Sorrentino_Luca",
+  "license": "ISC",
+  "dependencies": {
+    "adafruit-pca9685": "^0.1.4",
+    "bower": "^1.8.2",
+    "i2c": "^0.2.3",
+    "i2c-bus": "^1.2.2",
+    "keyboard-js": "^1.1.4",
+    "mime": "^2.0.3",
+    "mime-lookup": "0.0.2",
+    "mime-types": "^2.1.17",
+    "pca9685": "^4.0.3",
+    "pigpio": "^0.6.2",
+    "python.js": "^0.5.0",
+    "sleep": "^5.1.1",
+    "socket.io": "^2.0.3"
+  }
+}

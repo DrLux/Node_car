@@ -1,0 +1,100 @@
+/**
+ * MimeLookup constructor
+ *
+ * e.g. var mime = new MimeLookup(require('mime-db'));
+ *
+ * @param db (Object) type definitions
+ */
+ function MimeLookup(db) {
+  // Map of extension -> mime type
+  this.types = Object.create(null);
+
+  // Map of mime type -> extension
+  this.extensions = Object.create(null);
+
+  if (typeof db === 'object') {
+    this.define(db);
+    this.default_type = this.lookup('bin');
+  }
+}
+
+/**
+ * Define mimetype -> extension mappings.  Each key is a mime-type that maps
+ * to an array of extensions associated with the type.  The first extension is
+ * used as the default extension for the type.
+ *
+ * e.g. mime.define({'audio/ogg', ['oga', 'ogg', 'spx']});
+ *
+ * @param map (Object) type definitions
+ */
+MimeLookup.prototype.define = function (map) {
+  for (var type in map) {
+    var exts = map[type];
+    if (!Array.isArray(exts) && exts.extensions) {
+      exts = exts.extensions;
+    }
+    for (var i = 0; i < exts.length; i++) {
+      if (process && process.env.DEBUG_MIME && this.types[exts]) {
+        console.warn(this._loading.replace(/.*\//, ''), 'changes "' + exts[i] + '" extension type from ' +
+          this.types[exts] + ' to ' + type);
+      }
+
+      this.types[exts[i]] = type;
+    }
+
+    // Default extension is the first one we encounter
+    if (!this.extensions[type]) {
+      this.extensions[type] = exts[0];
+    }
+  }
+};
+
+/**
+ * Lookup a mime type based on extension
+ */
+MimeLookup.prototype.lookup = function(path, fallback) {
+  var ext = path.replace(/.*[\.\/\\]/, '').toLowerCase();
+
+  return this.types[ext] || fallback || this.default_type;
+};
+
+/**
+ * Return file extension associated with a mime type
+ */
+MimeLookup.prototype.extension = function(mimeType) {
+  var type = mimeType.match(/^\s*([^;\s]*)(?:;|\s|$)/)[1].toLowerCase();
+  return this.extensions[type];
+};
+
+/**
+ * Return all MIME types which matching a pattern
+ */
+MimeLookup.prototype.glob = function (pattern) {
+  if (pattern == '*/*')
+    return ['application/octet-stream'];
+
+  var slashIdx = pattern.indexOf('/');
+  if (slashIdx == -1 || pattern.slice(slashIdx + 1) !== "*")
+    return [pattern];
+
+  var prefix = pattern.slice(0,slashIdx+1);
+  var result = [];
+  var keys = Object.keys(this.extensions);
+  keys.forEach(function (name) {
+    if (name.slice(0, slashIdx+1) === prefix)
+      result.push(name);
+  })
+  return result;
+}
+
+/**
+ * Lookup a charset based on mime type.
+ */
+MimeLookup.prototype.charsets = {
+  lookup: function(mimeType, fallback) {
+    // Assume text types are utf8
+    return (/^text\//).test(mimeType) ? 'UTF-8' : fallback;
+  }
+};
+
+module.exports = MimeLookup;

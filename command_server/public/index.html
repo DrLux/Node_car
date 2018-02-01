@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <script>
+    var ua = navigator.userAgent;
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|OperaMini|Mobile|mobile|CriOS/i.test(ua))
+      window.location.replace(window.location + "smartphone_interface.html")
+  </script>
+  <body>
+	<img src="http://192.168.4.1:8000/stream.mjpeg"></img>
+  	<span id="result_1"></span>
+  	<span id="result_2"></span>
+  
+  <link rel="stylesheet" type="text/css" href="css/index.css"> 
+  <script type="text/javascript" src="/socket.io/socket.io.js" ></script>
+  <script type="text/javascript" src="/js/pc_interface.js"></script>
+  <script type="text/javascript" src="./js/virtualjoystick.js" ></script>
+  <script type="text/javascript" src="/js/tablet_interface.js"></script>
+</body>
+
+</html>
