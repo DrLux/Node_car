@@ -1,3 +1,0 @@
-extend-diff-ignore = "(^|/)(Makefile|setup\.cfg)$"
-extend-diff-ignore = "(^|/)(docs/.*)$"
-extend-diff-ignore = "(^|/)(build/sphinx/doctrees/.*)$"
