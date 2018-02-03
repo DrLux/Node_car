@@ -5,7 +5,7 @@ This project consists of a robot built with Raspberry Pi 3 that can be controlle
 ### Documentation ###
 All the documentation are available  on the [dedicated page](https://drlux.github.io/node_car.html) .
 
-### Istructions ###
+### Instructions ###
 The node_car.js library is completely autonomous and can also be used for different projects, it is just sufficient to set parameters correctly.
 
 Each component needs a parameters such as:
