@@ -1,4 +1,4 @@
-# Node_car: A Remote Controlled Raspberry Car Whit Node.js #
+# Node_car: A Remote Controlled Raspberry Car With Node.js #
 
 This project consists of a robot built with Raspberry Pi 3 that can be controlled remotely. The first server (written in Node.js) listens commands from client while another server (written in python but not present in this repository) transmits the images captured by the robot's camera. The connection is established via Wi-Fi, so you can control it from your pc (keyboard), your tablet (touchscreen) or even from your smartphone (touchscreen plus accelerometer).
 
